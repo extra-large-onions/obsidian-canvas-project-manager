@@ -1,8 +1,421 @@
-/*
+/* ─── Sidebar shell ──────────────────────────────────────────────────────────── */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.canvas-pm {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    user-select: none;
+}
 
-If your plugin does not need CSS, delete this file.
+.canvas-pm-header {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 14px 8px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    color: var(--text-normal);
+}
 
-*/
+/* ─── Info line ──────────────────────────────────────────────────────────────── */
+
+.cpm-info-line {
+    padding: 6px 14px 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* ─── Collapsible sections ───────────────────────────────────────────────────── */
+
+.cpm-section {
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.cpm-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.1s;
+}
+
+.cpm-section-head:hover { background: var(--background-modifier-hover); color: var(--text-normal); }
+.cpm-section-title { flex: 1; }
+.cpm-chevron { font-size: 10px; opacity: 0.6; }
+
+.cpm-section-body {
+    padding: 10px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.cpm-section-body.cpm-collapsed { display: none; }
+
+/* ─── Shared helpers ─────────────────────────────────────────────────────────── */
+
+.cpm-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+.cpm-sub-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+.cpm-hint {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin: 0;
+}
+.cpm-icon-btn {
+    padding: 1px 6px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+}
+.cpm-icon-btn:hover    { background: var(--background-modifier-hover); color: var(--text-normal); }
+.cpm-icon-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* ─── Hierarchy tree ─────────────────────────────────────────────────────────── */
+
+.cpm-hierarchy {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+/* Collapsible group wrapper */
+.cpm-tree-group-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Indented children container */
+.cpm-tree-children {
+    padding-left: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-left: 1px solid var(--background-modifier-border);
+    margin-left: 8px;
+}
+.cpm-tree-children.cpm-tree-collapsed { display: none; }
+
+/* Every tree row */
+.cpm-tree-node {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 4px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.1s, opacity 0.15s;
+}
+.cpm-tree-node:hover { background: var(--background-modifier-hover); }
+
+/* Collapse chevron button */
+.cpm-tree-chevron {
+    flex-shrink: 0;
+    width: 14px;
+    font-size: 9px;
+    line-height: 1;
+    color: var(--text-faint);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-align: center;
+    transition: color 0.1s;
+}
+.cpm-tree-chevron:hover { color: var(--text-normal); }
+
+/* Invisible placeholder to align leaf nodes with groups */
+.cpm-tree-chevron-gap {
+    display: inline-block;
+    width: 14px;
+    flex-shrink: 0;
+}
+
+.cpm-tree-group { font-weight: 600; }
+
+.cpm-tree-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-normal);
+}
+.cpm-tree-group-label { color: var(--text-accent); }
+
+.cpm-tree-count {
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 8px;
+    background: var(--background-modifier-border);
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* ─── Task status icons (hierarchy) ─────────────────────────────────────────── */
+
+.cpm-task-icon {
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-left: auto;
+    padding-left: 4px;
+}
+.cpm-task-icon-open { color: var(--color-orange, #e09000); }
+.cpm-task-icon-done { color: var(--color-green,  #08b94e); }
+
+/* ─── Color dots ─────────────────────────────────────────────────────────────── */
+
+.cpm-node-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--background-modifier-border);
+    border: 1px solid var(--background-modifier-border-hover, #aaa);
+    flex-shrink: 0;
+}
+.cpm-dot-1 { background: #e93147; border-color: #e93147; }
+.cpm-dot-2 { background: #ec7500; border-color: #ec7500; }
+.cpm-dot-3 { background: #c8a000; border-color: #c8a000; }
+.cpm-dot-4 { background: #08b94e; border-color: #08b94e; }
+.cpm-dot-5 { background: #00bfbc; border-color: #00bfbc; }
+.cpm-dot-6 { background: #7852ee; border-color: #7852ee; }
+
+/* ─── Loading spinner ────────────────────────────────────────────────────────── */
+
+.cpm-loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 4px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-style: italic;
+}
+.cpm-spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--background-modifier-border);
+    border-top-color: var(--interactive-accent);
+    border-radius: 50%;
+    animation: cpm-spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+@keyframes cpm-spin { to { transform: rotate(360deg); } }
+
+/* ─── Canvas toolbar ─────────────────────────────────────────────────────────── */
+
+.cpm-canvas-toolbar {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    background: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+    pointer-events: all;
+    white-space: nowrap;
+    max-width: calc(100% - 60px);
+    user-select: none;
+}
+
+/* Shared toolbar button */
+.cpm-tb-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.cpm-tb-btn:hover {
+    background: var(--background-modifier-hover);
+    color: var(--text-normal);
+}
+.cpm-tb-btn.cpm-tb-active {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border-color: var(--interactive-accent);
+}
+
+/* Separator */
+.cpm-tb-sep {
+    width: 1px;
+    height: 16px;
+    background: var(--background-modifier-border);
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+
+/* Tags */
+.cpm-tb-tags-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Dropdown stretches full width of the toolbar pill */
+.cpm-tb-tag-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px 14px;
+    max-height: 260px;
+    overflow-y: auto;
+    background: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+}
+
+/* Tag chips (reused in dropdown) */
+.cpm-tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-secondary);
+    color: var(--text-muted);
+    font-size: 11px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s, border-color 0.1s, color 0.1s;
+    white-space: nowrap;
+}
+.cpm-tag-chip:hover {
+    border-color: var(--interactive-accent);
+    color: var(--text-normal);
+}
+.cpm-tag-chip.cpm-tag-active {
+    background: var(--interactive-accent);
+    border-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+}
+.cpm-tag-name   { font-weight: 500; }
+.cpm-tag-chip-count { opacity: 0.7; font-size: 10px; }
+.cpm-tag-chip.cpm-tag-active .cpm-tag-chip-count { opacity: 0.85; }
+
+/* Task filter */
+.cpm-tb-task-wrap {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+}
+.cpm-tb-task-btn {
+    padding: 4px 8px;
+}
+.cpm-tb-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(255,255,255,0.2);
+    font-variant-numeric: tabular-nums;
+}
+.cpm-tb-btn:not(.cpm-tb-active) .cpm-tb-count {
+    background: var(--background-modifier-border);
+    color: var(--text-muted);
+}
+
+/* Find input */
+.cpm-tb-find {
+    flex: 1;
+    min-width: 120px;
+    max-width: 240px;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 16px;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-secondary);
+    color: var(--text-normal);
+    outline: none;
+    transition: border-color 0.1s;
+}
+.cpm-tb-find:focus {
+    border-color: var(--interactive-accent);
+    background: var(--background-primary);
+}
+.cpm-tb-find::placeholder { color: var(--text-faint); }
+
+/* Auto-size button */
+.cpm-tb-auto-btn {
+    font-size: 14px;
+    padding: 3px 8px;
+}
+
+/* ─── Hierarchy dimmed rows ──────────────────────────────────────────────────── */
+
+.cpm-tree-node.cpm-tree-dimmed {
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+/* ─── Canvas node states ─────────────────────────────────────────────────────── */
+
+.canvas-node {
+    transition: opacity 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.canvas-node.cpm-node-dimmed {
+    opacity: 0.25 !important;
+    filter: grayscale(0.4) !important;
+    transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+@keyframes cpm-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 2px var(--interactive-accent),
+                    0 0 10px color-mix(in srgb, var(--interactive-accent) 35%, transparent);
+    }
+    50% {
+        box-shadow: 0 0 0 2px var(--interactive-accent),
+                    0 0 22px color-mix(in srgb, var(--interactive-accent) 60%, transparent);
+    }
+}
+
+.canvas-node.cpm-node-active {
+    filter: brightness(1.12) !important;
+    animation: cpm-glow 2.8s ease-in-out infinite !important;
+    z-index: 2 !important;
+    position: relative !important;
+}
