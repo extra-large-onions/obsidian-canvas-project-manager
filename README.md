@@ -1,3 +1,9 @@
+turning .canvas into a project management tool
+vibe coded in 3 hours with claude, ignore docs.md, auto generated as well
+
+the hierarchy on the side is really snappy due to the auto refresh
+there's a bunch of features to be added before production ready
+
 # Obsidian Sample Plugin
 
 This is a sample plugin for Obsidian (https://obsidian.md).
